@@ -23,7 +23,7 @@ Instrucciones oficiales: [publicar desde una rama](https://docs.github.com/en/pa
 1. En **Mi empresa**, introduce el título, el titular, NIF/CIF, licencia, matrícula y dirección. Guarda los datos. El título inicial es **Servicio taxi APC Granada** y se puede editar.
 2. En **Servicio y cliente**, elige **Recibo** o **Factura**. La fecha y la hora se rellenan automáticamente y se pueden editar.
 3. Introduce origen, destino y los datos del cliente. Para una factura se requieren nombre o razón social, NIF/CIF y dirección fiscal del cliente, además de la dirección fiscal del titular.
-4. Introduce **el total pagado**, con IVA y suplementos incluidos. Puedes detallar los suplementos: se separan del trayecto, pero no se suman otra vez al total.
+4. Introduce **el total pagado**, con IVA y suplementos incluidos. Hay dos suplementos: **Salida de estación**, con su importe, y **Maletas o bultos**, con precio por unidad y cantidad de 1 a 5. La app multiplica la cantidad por el precio. Se separan del trayecto, pero no se suman otra vez al total.
 5. Elige **Efectivo** o **Tarjeta**. Revisa la vista previa y pulsa **Emitir**.
 6. Descarga el **PDF**, el **TXT**, imprime o utiliza **Compartir**. La posibilidad de compartir directamente un PDF depende del navegador; también puedes descargarlo y adjuntarlo en WhatsApp o email.
 
@@ -32,6 +32,10 @@ Los nombres de los archivos identifican servicio, fecha y documento. Por ejemplo
 `servicio-taxi-2026-10-05-F-2026-0001.pdf`
 
 La numeración se asigna una sola vez al emitir. Descargar, imprimir o compartir el mismo documento no consume otro número. Las facturas utilizan `F-AÑO-0001` y los recibos `R-AÑO-0001`, con contadores independientes para cada año de la fecha del servicio. Los documentos emitidos conservan los datos con los que se crearon, aunque después edites los datos de empresa.
+
+## Editar un servicio emitido
+
+Abre el documento en **Mis documentos** y pulsa **Editar servicio**. Puedes cambiar suplementos, cliente, importe y los demás datos del servicio. Indica el motivo y guarda la corrección. El original se conserva: una factura genera una **factura rectificativa**, numerada en la serie `FR`, y un recibo genera un **recibo corregido**, en la serie `RC`. La corrección identifica el documento anterior y muestra los importes corregidos y su diferencia. El total corregido sustituye al anterior; no representa un segundo cobro.
 
 ## IVA
 
@@ -56,6 +60,8 @@ Para pasar los datos al PC:
 2. Transfiere el archivo al ordenador por el medio que prefieras.
 3. Abre la misma app en el PC y utiliza **Mis documentos → Importar copia JSON**.
 
+Actualiza primero la app en ambos dispositivos. Las nuevas copias que contienen suplementos detallados o correcciones usan el formato JSON versión 2. Esta edición también admite las copias anteriores.
+
 Haz copias frecuentes y consérvalas fuera del navegador. Borrar los datos del navegador, cambiar de teléfono o utilizar el modo privado puede hacer que pierdas lo guardado. Las copias contienen datos fiscales y de clientes; no las subas al repositorio público de GitHub.
 
 Si vas a emitir facturas desde el PC, importa primero la última copia del móvil. Antes de volver a emitir desde el móvil, importa la última copia del PC. Sin este intercambio, ambos dispositivos podrían utilizar el mismo número para documentos diferentes.
@@ -64,4 +70,23 @@ Si vas a emitir facturas desde el PC, importa primero la última copia del móvi
 
 Incluye PWA, funcionamiento sin conexión después de la primera carga, modo claro y oscuro, documentos guardados, numeración, IVA, PDF, TXT y copias JSON. El ZIP contiene la aplicación lista para GitHub Pages; no requiere instalar componentes ni compilarla.
 
-El APK para Android queda como una posible ampliación. Esta versión tampoco incluye rectificaciones ni conexión con sistemas de envío fiscal: esas funciones requerirían una adaptación específica.
+La edición 1.1.0 incluye también el APK Android, los dos suplementos y la corrección de documentos emitidos. No incluye conexión con sistemas de envío fiscal.
+
+
+## Identidad independiente y actualización de GitHub Pages
+
+Esta edición utiliza el identificador propio `/es.taxi.apcgranada.recibos.pwa`. Su inicio, alcance y trabajador sin conexión quedan en la carpeta del repositorio. Cada carpeta utiliza una caché independiente; esta app no borra las cachés de otras aplicaciones.
+
+Si ya habías subido la primera edición, reemplaza los archivos con este ZIP en **el mismo repositorio y carpeta** y espera a que GitHub Pages termine la publicación. Abre el enlace directamente en Chrome o Safari y recarga con conexión. Pulsa **Instalar app** o usa el menú del navegador. Si el enlace se abre dentro de otra PWA, vuelve a abrirlo directamente en el navegador.
+
+Antes de desinstalar un acceso anterior, guarda una copia JSON. No borres los datos del navegador para arreglar la instalación: hacerlo podría borrar tus facturas y las de otras aplicaciones del mismo dominio. La actualización mantiene el almacenamiento y los contadores cuando conservas el mismo enlace; si cambias de carpeta o dominio, importa la copia JSON.
+
+Referencia: [identificador del manifiesto web](https://www.w3.org/TR/appmanifest/#id-member).
+
+## Desglose de importes · 1.1.3
+
+Importe taxímetro = total cobrado menos suplementos incluidos. La base imponible total es el importe sin IVA de todo el servicio, suplementos incluidos: total / 1,10. Ejemplo: total 20 €, suplementos 2 €, taxímetro 18 €, base imponible total 18,18 € e IVA 1,82 €. El desglose se muestra igual en la vista previa, PDF y TXT.
+
+## Orden del desglose · 1.1.4
+
+La vista previa, PDF y TXT presentan: importe taxímetro, suplementos, Total servicio, base imponible total e IVA incluido. Total servicio suma el taxímetro y los suplementos; la base y el IVA desglosan esa cantidad. Se muestra el total una sola vez en el documento.
