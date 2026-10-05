@@ -1,4 +1,4 @@
-import {validateCompany,validateService,documentKinds,correctionData,docNumber} from './core.js?v=10';
+import {validateCompany,validateService,documentKinds,correctionData,docNumber} from './core.js?v=11';
 export const numberKey=d=>`${d.kind}:${d.year}:${d.seq}`;
 export function sameDocument(a,b){return a.id===b.id&&a.kind===b.kind&&a.year===b.year&&a.seq===b.seq&&a.created===b.created&&JSON.stringify(a.data)===JSON.stringify(b.data);}
 export function validateBackup(raw){

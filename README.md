@@ -90,3 +90,7 @@ Importe taxímetro = total cobrado menos suplementos incluidos. La base imponibl
 ## Orden del desglose · 1.1.4
 
 La vista previa, PDF y TXT presentan: importe taxímetro, suplementos, Total servicio, base imponible total e IVA incluido. Total servicio suma el taxímetro y los suplementos; la base y el IVA desglosan esa cantidad. Se muestra el total una sola vez en el documento.
+
+## Formato profesional · 1.2.0
+
+Factura o recibo con número destacado, titular y cliente en columnas, fechas y forma de pago agrupadas, separador amarillo antes de Detalles del servicio e importes alineados. Total servicio suma taxímetro y suplementos; debajo figuran base imponible e IVA. También se aplica a rectificativas y a nuevas exportaciones de documentos antiguos.
